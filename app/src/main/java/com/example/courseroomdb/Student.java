@@ -10,16 +10,9 @@ import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
 import java.util.Date;
-@Entity(
-        tableName = "StudentTable",
-        foreignKeys = @ForeignKey(
-                entity = Course.class,
-                parentColumns = {"courseId"},
-                childColumns = {"courseId"},
-                onDelete = ForeignKey.CASCADE
-        ),
-        indices = {@Index(value = "courseId")}
-)
+@Entity(tableName = "StudentTable",
+        foreignKeys = @ForeignKey(entity = Course.class, parentColumns = {"courseId"}, childColumns = {"courseId"}, onDelete = ForeignKey.CASCADE),
+        indices = {@Index(value = "courseId")} )
 @TypeConverters(Converter.class)
 
 public class Student {
@@ -30,8 +23,7 @@ public class Student {
     private  String department ;
     private Date dateOfBirth ;
 
-//    private Bitmap photo ;
-private byte[] photo;
+     private byte[] photo;
 
     private int courseId ;
 

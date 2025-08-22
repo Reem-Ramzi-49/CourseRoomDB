@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Student.class , Course.class}, version = 2, exportSchema = false)
+@Database(entities = {Student.class , Course.class}, version = 1, exportSchema = false)
 @TypeConverters(Converter.class)
 public abstract class MyDataBase extends RoomDatabase {
 

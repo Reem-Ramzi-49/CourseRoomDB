@@ -28,16 +28,13 @@ public class student_view extends AppCompatActivity {
         binding = ActivityStudentViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         viewModel = new ViewModelProvider(this).get(MyViewModel.class);
-
-
-        studentAdapter = new StudentAdapter(new ArrayList<>());
-        courseAdapter = new CourseAdapter(new ArrayList<>());
-
 
         binding.recyclerMain.setLayoutManager(new LinearLayoutManager(this));
 
-
+        studentAdapter = new StudentAdapter(new ArrayList<>());
+        courseAdapter = new CourseAdapter(new ArrayList<>());
         showStudents();
 
 
@@ -55,7 +52,7 @@ public class student_view extends AppCompatActivity {
         });
     }
 
-    private void showStudents() {
+     private void showStudents() {
         showingStudents = true;
         binding.tvTitle.setText("Students List");
         binding.recyclerMain.setAdapter(studentAdapter);
