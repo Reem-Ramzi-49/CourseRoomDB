@@ -35,9 +35,10 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        Course course = courseList.get(position);
-        holder.bind(course);
+        Course c = courseList.get(position);
 
+        holder.binding.tvName.setText(c.getCourseName());
+        holder.binding.tvCount.setText("Students: " + c.getNoOfStudents());
 
 
     }
@@ -55,10 +56,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             this.binding = binding;
         }
 
-        public void bind(Course course) {
-            binding.tvName.setText(course.getCourseName());
-            binding.tvCount.setText("Students: " + course.getNoOfStudents());
-        }
 
 
 

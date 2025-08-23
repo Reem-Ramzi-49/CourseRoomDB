@@ -25,18 +25,33 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
     @NonNull
     @Override
     public StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        StudentItemBinding binding1 = StudentItemBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
-                parent,
-                false
-        );
+        StudentItemBinding binding1 = StudentItemBinding.inflate
+                (LayoutInflater.from(parent.getContext()), parent, false);
         return new StudentViewHolder(binding1);
     }
 
     @Override
     public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
-        holder.bind(students.get(position));
-    }
+        int pos =position ;
+        Student s =students.get(pos);
+        holder.binding.tvName.setText(s.getName());
+        holder.binding.tvDepartment.setText(s.getDepartment());
+        holder.binding.tvCourseOfStudent.setText("Course Num : " + s.getCourseId());
+
+        if (s.getDateOfBirth() != null) {
+             CharSequence shown = android.text.format.DateFormat.format("dd/MM/yyyy", s.getDateOfBirth());
+            holder.binding.tvDate.setText(shown);
+        } else {
+            holder.binding.tvDate.setText("—");
+        }
+
+        Bitmap bmp = Converter.getByteAsBitmap(s.getPhoto());
+        if (bmp != null) {
+            holder.binding.img.setImageBitmap(bmp);
+        } else {
+            holder.binding.img.setImageResource(R.drawable.ic_launcher_foreground);
+        }
+     }
 
     @Override
     public int getItemCount() {
@@ -57,24 +72,24 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             this.binding = binding;
         }
 
-        public void bind(Student student) {
-            binding.tvName.setText(student.getName());
-            binding.tvDepartment.setText(student.getDepartment());
-            binding.tvCourseOfStudent.setText("Coures Num : " + student.getCourseId());
-
-            if (student.getDateOfBirth() != null) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                binding.tvDate.setText(sdf.format(student.getDateOfBirth()));
-            }
-
-
-            byte[] photoBytes = student.getPhoto();
-            if (photoBytes != null) {
-                Bitmap bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.length);
-                binding.img.setImageBitmap(bmp);
-            } else {
-                binding.img.setImageResource(R.drawable.ic_launcher_foreground);
-            }
-        }
+//        public void bind(Student student) {
+//            binding.tvName.setText(student.getName());
+//            binding.tvDepartment.setText(student.getDepartment());
+//            binding.tvCourseOfStudent.setText("Coures Num : " + student.getCourseId());
+//
+//            if (student.getDateOfBirth() != null) {
+//                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+//                binding.tvDate.setText(sdf.format(student.getDateOfBirth()));
+//            }
+//
+//
+//            byte[] photoBytes = student.getPhoto();
+//            if (photoBytes != null) {
+//                Bitmap bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.length);
+//                binding.img.setImageBitmap(bmp);
+//            } else {
+//                binding.img.setImageResource(R.drawable.ic_launcher_foreground);
+//            }
+//        }
     }
 }
